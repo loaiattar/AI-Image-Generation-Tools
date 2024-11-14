@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Generators</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+        :root {
+            --bg-color: #0a192f;
+            --text-color: #e2e8f0;
+            --accent-color: #64ffda;
+            --secondary-color: #4f46e5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 3rem;
+            position: relative;
+        }
+
+        .main-title {
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            position: relative;
+        }
+
+        .word-container {
+            display: inline-block;
+            overflow: hidden;
+            margin: 0 10px;
+        }
+
+        .word {
+            display: block;
+            transform-origin: center center;
+        }
+
+        .letter {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(100%);
+            color: var(--accent-color);
+            text-shadow: 
+                0 0 10px rgba(100, 255, 218, 0.3),
+                0 0 20px rgba(100, 255, 218, 0.2),
+                0 0 30px rgba(100, 255, 218, 0.1);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #8892b0;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .decorative-line {
+            position: absolute;
+            height: 3px;
+            width: 100px;
+            background: var(--accent-color);
+            opacity: 0.5;
+        }
+
+        .line-left {
+            left: -120px;
+            top: 50%;
+        }
+
+        .line-right {
+            right: -120px;
+            top: 50%;
+        }
+
+        .tech-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            opacity: 0;
+        }
+
+        .icon, .npage {
+            font-size: 2rem;
+            color: var(--accent-color);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .icon:hover,
+        .npage:hover {
+            opacity: 1;
+            transform: translateY(-7px);
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 3rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .decorative-line {
+                width: 50px;
+            }
+
+            .line-left {
+                left: -60px;
+            }
+
+            .line-right {
+                right: -60px;
+            }
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-content">
+        <div class="decorative-line line-left"></div>
+        <div class="decorative-line line-right"></div>
+        
+        <h1 class="main-title">
+            <div class="word-container">
+                <div class="word">
+                    <span class="letter">A</span>
+                    <span class="letter">I</span>
+                </div>
+            </div>
+            <div class="word-container">
+                <div class="word">
+                    <span class="letter">I</span>
+                    <span class="letter">M</span>
+                    <span class="letter">A</span>
+                    <span class="letter">G</span>
+                    <span class="letter">E</span>
+                    <span class="letter">S</span>
+                </div>
+            </div>
+            <div class="word-container">
+                <div class="word">
+                    <span class="letter">G</span>
+                    <span class="letter">E</span>
+                    <span class="letter">N</span>
+                    <span class="letter">E</span>
+                    <span class="letter">R</span>
+                    <span class="letter">A</span>
+                    <span class="letter">T</span>
+                    <span class="letter">O</span>
+                    <span class="letter">R</span>
+                    <span class="letter">S</span>
+                </div>
+            </div>
+        </h1>
+        
+        <p class="subtitle">premier projet collaboratifs à HETIC</p>
+
+        <div class="tech-icons">
+            <i class="icon fas fa-microchip"></i>
+            <i class="icon fas fa-brain"></i>
+            <i class="icon fas fa-camera"></i>
+            <i class="icon fas fa-palette"></i>
+        </div>
+        <a class="npage" href="ai-tools-showcase.html">Découvrez nos outils IA.</a>
+    </div>
+
+    <script>
+        // Initialize GSAP animation
+        gsap.set(".letter", { opacity: 0, y: 100 });
+        gsap.set(".subtitle", { opacity: 0, y: 20 });
+        gsap.set(".tech-icons", { opacity: 0, y: 20 });
+        gsap.set(".decorative-line", { scaleX: 0 });
+
+        // Create timeline
+        const tl = gsap.timeline();
+
+        // Animate letters
+        tl.to(".letter", {
+            duration: 0.8,
+            opacity: 1,
+            y: 0,
+            stagger: {
+                each: 0.1,
+                ease: "back.out(1.7)"
+            }
+        })
+        // Animate subtitle
+        .to(".subtitle", {
+            duration: 1,
+            opacity: 1,
+            y: 0,
+            ease: "power4.out"
+        }, "-=0.5")
+        // Animate decorative lines
+        .to(".decorative-line", {
+            duration: 1,
+            scaleX: 1,
+            ease: "power4.out"
+        }, "-=0.8")
+        // Animate icons
+        .to(".tech-icons", {
+            duration: 1,
+            opacity: 1,
+            y: 0,
+            ease: "power4.out"
+        }, "-=0.5")
+        // See More btn
+        .to(".npage", {
+            duration: 1,
+            scaleX: 1,
+            opacity: 1,
+            ease:"power4.out"
+        }, "-=0.5");
+
+        // Add hover effect to letters
+        document.querySelectorAll('.letter').forEach(letter => {
+            letter.addEventListener('mouseover', () => {
+                gsap.to(letter, {
+                    duration: 0.3,
+                    scale: 1.2,
+                    color: '#ffffff',
+                    ease: "power2.out"
+                });
+            });
+            letter.addEventListener('mouseout', () => {
+                gsap.to(letter, {
+                    duration: 0.3,
+                    scale: 1,
+                    color: '#64ffda',
+                    ease: "power2.in"
+                });
+            });
+        });
+    </script>
+</body>
+</html>
