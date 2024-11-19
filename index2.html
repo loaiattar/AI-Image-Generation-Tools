@@ -28,12 +28,12 @@
 
         header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
             padding: 2rem;
             background: rgba(15, 23, 42, 0.6);
-            border-radius: 1rem;
+            border-radius: 2rem;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(148, 163, 184, 0.1);
+            border: 2px solid rgba(148, 163, 184, 0.1);
             backdrop-filter: blur(10px);
         }
 
@@ -70,8 +70,10 @@
 
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 25px;
+            
         }
 
         .tool-card {
@@ -107,12 +109,13 @@
 
         .tool-card:hover .tool-logo {
             background: rgba(74, 222, 128, 0.2);
-            transform: scale(1.1);
+            transform: scale(1.0);
         }
 
         .tool-logo img {
             width: 50px;
             height: 50px;
+            border-radius: 50%;
             object-fit: contain;
         }
 
@@ -133,6 +136,19 @@
             color: #94a3b8;
             line-height: 1.6;
             font-weight: 300;
+        }
+        .liens {
+            background-color: #3d4e43;
+            font-size: 24px;
+            color: #d8deed;
+            font-family: 'Orbitron', sans-serif;
+            margin-left: 0px;
+            padding: 10px;
+        }
+        .slider-btn {
+            width: 30px;
+            height: 20px;
+            color:#94a3b8;
         }
 
         @keyframes fadeIn {
@@ -159,12 +175,23 @@
     <div class="container">
         <header>
             <h1>AI Image Generation Tools</h1>
-            <h2>Bonjour et bienvenue à bord de notre premier projet collaboratifs à HETIC , autour des capacités de l'IA dans la génération d'art visuel.</h2>
-            <p class="subtitle">Pour vous présenter cela nous avons réaliser un benchmark de différentes IA génératrices d'images , 5 images générés avec différentes IA afin de découvrir les différentes capacités de ces IA ; ainsi qu'un tutoriel sur l'une de ces IA afin d'expliquer le fonctionnement d'utilisation d'un outil.
+            <h2>Bonjour et bienvenue à bord de notre premier projet collaboratif à HETIC, centré sur les capacités de l'IA dans la création d'art visuel.</h2>
+            <p class="subtitle">Pour vous présenter ce projet, nous avons réalisé un benchmark de plusieurs IA génératrices d'images. Vous y trouverez cinq images créées avec différentes intelligences artificielles, afin de mettre en lumière les capacités variées de chacune. De plus, nous avons conçu un tutoriel détaillé sur l'une de ces IA pour vous expliquer son fonctionnement et la manière d'utiliser cet outil.
             </p>
         </header>
-
         <div class="tools-grid">
+            <a class="subtitle tool-card liens" href="https://app.luminpdf.com/viewer/673bb652f4f87053b3ce7b9f" target="_blank">Benchmark</a>
+            <a class="subtitle tool-card liens" href="https://oxymis-my.sharepoint.com/:p:/r/personal/j_sorrentino1_hetic_eu/_layouts/15/Doc.aspx?sourcedoc=%7B75EAA6F7-F65C-4F4D-838E-B3361A3C24AE%7D&file=Pr%25u00e9sentation.pptx&nav=eyJzSWQiOjI2MSwiY0lkIjoxOTk1MTQ5ODU4fQ&action=edit&mobileredirect=true" target="_blank">Tutoriel</a>
+            <a class="subtitle tool-card liens" href="https://www.canva.com/design/DAGVzna-75g/GgdverMCxWg-dbtvWqu-uA/edit" target="_blank">Presentation d'Images</a>
+         </div>
+        <div class="tool-card">
+            <div id="slider tool-card">
+                <img src="imgs/img-pro1.png" alt="Image 1" id="slider-image">
+            </div>
+             <div class="tools-grid">
+                <button class="subtitle tool-card liens" onclick="nextImage()">Previous</button>
+                <button class="subtitle tool-card liens" onclick="prevImage()">Next</button>
+            </div>
             <div class="tool-card">
                 <div class="tool-logo">
                     <a href="https://ideogram.ai/login" target="_blank">
@@ -229,12 +256,35 @@
             </div>
         </div>  
     
-        <div class="tools-grid">
-           <a class="subtitle tool-card" href="https://app.luminpdf.com/viewer/673bb652f4f87053b3ce7b9f" target="_blank">Benchmark</a>
-           <a class="subtitle tool-card" href="https://oxymis-my.sharepoint.com/:p:/r/personal/j_sorrentino1_hetic_eu/_layouts/15/Doc.aspx?sourcedoc=%7B75EAA6F7-F65C-4F4D-838E-B3361A3C24AE%7D&file=Pr%25u00e9sentation.pptx&nav=eyJzSWQiOjI2MSwiY0lkIjoxOTk1MTQ5ODU4fQ&action=edit&mobileredirect=true" target="_blank">Tutoriel Video</a>
-           <a class="subtitle tool-card" href="https://www.canva.com/design/DAGVzna-75g/GgdverMCxWg-dbtvWqu-uA/edit" target="_blank">Presentation d'Images</a>
-        </div>
+        
 
     </div>
+    <script>
+        // List of image URLs
+        const images = [
+            'img-pro1.png',
+            'img-pro2.jpeg',
+            'img-pro3.png',
+            'img-pro4.jpg',
+            'img-pro5.png'
+        ];
+
+        let currentIndex = 0;
+
+        function showImage(index) {
+            const imgElement = document.getElementById('slider-image');
+            imgElement.src = "./imgs/" + images[index];
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            showImage(currentIndex);
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            showImage(currentIndex);
+        }
+    </script>
 </body>
 </html>
